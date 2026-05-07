@@ -1,4 +1,4 @@
-package com.javanauta.bffagendadordetarefas.infrastructure.Client;
+package com.javanauta.bffagendadordetarefas.infrastructure.client;
 
 import com.javanauta.bffagendadordetarefas.business.dto.in.EnderecoDTORequest;
 import com.javanauta.bffagendadordetarefas.business.dto.in.LoginDTORequest;

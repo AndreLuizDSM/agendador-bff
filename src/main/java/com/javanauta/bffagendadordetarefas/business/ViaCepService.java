@@ -1,7 +1,7 @@
 package com.javanauta.bffagendadordetarefas.business;
 
 import com.javanauta.bffagendadordetarefas.business.dto.out.ViaCepDTOResponse;
-import com.javanauta.bffagendadordetarefas.infrastructure.Client.UsuarioClient;
+import com.javanauta.bffagendadordetarefas.infrastructure.client.UsuarioClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

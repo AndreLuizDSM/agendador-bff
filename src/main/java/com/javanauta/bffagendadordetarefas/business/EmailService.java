@@ -1,7 +1,7 @@
 package com.javanauta.bffagendadordetarefas.business;
 
 import com.javanauta.bffagendadordetarefas.business.dto.out.TarefaDTOResponse;
-import com.javanauta.bffagendadordetarefas.infrastructure.Client.EmailClient;
+import com.javanauta.bffagendadordetarefas.infrastructure.client.EmailClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

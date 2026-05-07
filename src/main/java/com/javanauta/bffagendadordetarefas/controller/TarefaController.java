@@ -4,7 +4,7 @@ import com.javanauta.bffagendadordetarefas.business.TarefaService;
 import com.javanauta.bffagendadordetarefas.business.dto.in.TarefaDTORequest;
 import com.javanauta.bffagendadordetarefas.business.dto.out.TarefaDTOResponse;
 import com.javanauta.bffagendadordetarefas.business.enums.StatusNotificacaoEnum;
-import com.javanauta.bffagendadordetarefas.infrastructure.Security.SecurityConfig;
+import com.javanauta.bffagendadordetarefas.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

@@ -1,4 +1,4 @@
-package com.javanauta.bffagendadordetarefas.infrastructure.Client.config;
+package com.javanauta.bffagendadordetarefas.infrastructure.client.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

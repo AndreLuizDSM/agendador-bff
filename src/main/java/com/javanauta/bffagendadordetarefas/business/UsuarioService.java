@@ -7,7 +7,7 @@ import com.javanauta.bffagendadordetarefas.business.dto.in.UsuarioDTORequest;
 import com.javanauta.bffagendadordetarefas.business.dto.out.EnderecoDTOResponse;
 import com.javanauta.bffagendadordetarefas.business.dto.out.TelefoneDTOResponse;
 import com.javanauta.bffagendadordetarefas.business.dto.out.UsuarioDTOResponse;
-import com.javanauta.bffagendadordetarefas.infrastructure.Client.UsuarioClient;
+import com.javanauta.bffagendadordetarefas.infrastructure.client.UsuarioClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

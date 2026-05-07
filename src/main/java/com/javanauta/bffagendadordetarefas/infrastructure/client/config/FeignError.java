@@ -1,4 +1,4 @@
-package com.javanauta.bffagendadordetarefas.infrastructure.Client.config;
+package com.javanauta.bffagendadordetarefas.infrastructure.client.config;
 
 import com.javanauta.bffagendadordetarefas.infrastructure.exceptions.BusinessException;
 import com.javanauta.bffagendadordetarefas.infrastructure.exceptions.ConflictException;
@@ -7,7 +7,6 @@ import com.javanauta.bffagendadordetarefas.infrastructure.exceptions.ResourceNot
 import com.javanauta.bffagendadordetarefas.infrastructure.exceptions.UnauthorizedException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
-import org.apache.commons.lang3.concurrent.ConcurrentException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -18,14 +17,15 @@ public class FeignError implements ErrorDecoder {
     @Override
     public Exception decode(String s, Response response) {
 
-        String mensagemErro = mensagemErro(response);
+        String mensagemErro = "Erro: " + mensagemErro(response);
+
 
         switch (response.status()){
-            case 409 : return new ConflictException("Erro: " + mensagemErro);
-            case 403 : return new ResourceNotFound("Erro: " + mensagemErro);
-            case 401 : return new UnauthorizedException("Erro: " + mensagemErro);
-            case 400 : return new IllegalArgumentException("Erro: " + mensagemErro);
-            default : return new BusinessException("Erro: " + mensagemErro);
+            case 409 : return new ConflictException(mensagemErro);
+            case 403 : return new ResourceNotFound(mensagemErro);
+            case 401 : return new UnauthorizedException(mensagemErro);
+            case 400 : return new IllegalArgumentException(mensagemErro);
+            default : return new BusinessException(mensagemErro);
         }
     }
 
@@ -36,7 +36,7 @@ public class FeignError implements ErrorDecoder {
             }
             return new String(response.body().asInputStream().readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ResourceNotFound("Erro" , e.getCause());
         }
 
     }

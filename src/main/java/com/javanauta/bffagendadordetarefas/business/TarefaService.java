@@ -3,7 +3,7 @@ package com.javanauta.bffagendadordetarefas.business;
 import com.javanauta.bffagendadordetarefas.business.dto.in.TarefaDTORequest;
 import com.javanauta.bffagendadordetarefas.business.dto.out.TarefaDTOResponse;
 import com.javanauta.bffagendadordetarefas.business.enums.StatusNotificacaoEnum;
-import com.javanauta.bffagendadordetarefas.infrastructure.Client.TarefaClient;
+import com.javanauta.bffagendadordetarefas.infrastructure.client.TarefaClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

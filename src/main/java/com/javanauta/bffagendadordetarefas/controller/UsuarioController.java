@@ -10,7 +10,7 @@ import com.javanauta.bffagendadordetarefas.business.dto.out.EnderecoDTOResponse;
 import com.javanauta.bffagendadordetarefas.business.dto.out.TelefoneDTOResponse;
 import com.javanauta.bffagendadordetarefas.business.dto.out.UsuarioDTOResponse;
 import com.javanauta.bffagendadordetarefas.business.dto.out.ViaCepDTOResponse;
-import com.javanauta.bffagendadordetarefas.infrastructure.Security.SecurityConfig;
+import com.javanauta.bffagendadordetarefas.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

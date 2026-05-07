@@ -1,4 +1,4 @@
-package com.javanauta.bffagendadordetarefas.infrastructure.Client;
+package com.javanauta.bffagendadordetarefas.infrastructure.client;
 
 import com.javanauta.bffagendadordetarefas.business.dto.out.TarefaDTOResponse;
 import org.springframework.cloud.openfeign.FeignClient;
