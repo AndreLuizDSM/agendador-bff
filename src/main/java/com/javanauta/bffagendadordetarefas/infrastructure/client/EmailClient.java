@@ -1,5 +1,6 @@
 package com.javanauta.bffagendadordetarefas.infrastructure.client;
 
+import com.javanauta.bffagendadordetarefas.business.dto.in.EmailDTO;
 import com.javanauta.bffagendadordetarefas.business.dto.out.TarefaDTOResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface EmailClient {
 
     @PostMapping
-    void enviarEmail(@RequestBody TarefaDTOResponse emailDTO);
+    void enviarEmail(@RequestBody EmailDTO emailDTO);
 }
 
 
