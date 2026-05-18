@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/usuario")
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Usuário", description = "Cadastro e login de usuários")
+@Tag(name = "Usuários", description = "Cadastro e login de usuários")
 @SecurityRequirement(name = SecurityConfig.SECURITY_SCHEME)
 public class UsuarioController {
 
@@ -30,7 +30,8 @@ public class UsuarioController {
     private final ViaCepService cepService;
 
     @PostMapping
-    @Operation(summary = "Salvar usuário", description = "Criar e cadastrar usuário")
+    @Operation(summary = "Salvar usuários", description = "Criar e cadastrar usuários")
+    @CrossOrigin(origins = "http://localhost:4200")
     @ApiResponse(responseCode = "200", description = "Usuário criado")
     @ApiResponse(responseCode = "401", description = "Credenciais inválidas")
     @ApiResponse(responseCode = "409", description = "Usuário já cadastrado")
