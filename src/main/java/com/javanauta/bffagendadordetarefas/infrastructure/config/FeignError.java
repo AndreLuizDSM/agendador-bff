@@ -1,4 +1,4 @@
-package com.javanauta.bffagendadordetarefas.infrastructure.client.config;
+package com.javanauta.bffagendadordetarefas.infrastructure.config;
 
 import com.javanauta.bffagendadordetarefas.infrastructure.exceptions.BusinessException;
 import com.javanauta.bffagendadordetarefas.infrastructure.exceptions.ConflictException;
@@ -22,7 +22,7 @@ public class FeignError implements ErrorDecoder {
 
         switch (response.status()){
             case 409 : return new ConflictException(mensagemErro);
-            case 403 : return new ResourceNotFound(mensagemErro);
+            case 404 : return new ResourceNotFound(mensagemErro);
             case 401 : return new UnauthorizedException(mensagemErro);
             case 400 : return new IllegalArgumentException(mensagemErro);
             default : return new BusinessException(mensagemErro);
@@ -31,9 +31,9 @@ public class FeignError implements ErrorDecoder {
 
     private String mensagemErro(Response response){
         try {
-            if (Objects.isNull(response)) {
-                return "";
-            }
+        //    if (Objects.isNull(response)) {
+        //          return "";
+        //     }
             return new String(response.body().asInputStream().readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new ResourceNotFound("Erro" , e.getCause());
