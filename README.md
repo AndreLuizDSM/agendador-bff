@@ -1,12 +1,12 @@
 # 🔀 Agendador — BFF (Backend for Frontend)
 
-> Camada de gateway do ecossistema de agendamento. Centraliza o roteamento de requisições, documentação da API e tratamento de erros HTTP.
+> Gateway do ecossistema de agendamento. Centraliza o roteamento de requisições, documentação da API, tratamento de erros HTTP e o CRON de notificações.
 
 ---
 
 ## 📌 Sobre o Projeto
 
-O BFF (Backend for Frontend) atua como ponto de entrada único para o frontend Angular. Em vez de o cliente chamar cada microsserviço diretamente, todas as requisições passam por este serviço, que roteia, agrega e trata os dados antes de retorná-los.
+O BFF (Backend for Frontend) atua como ponto de entrada único para o frontend. Em vez de o cliente chamar cada microsserviço diretamente, todas as requisições passam por este serviço, que roteia e trata os dados antes de retorná-los.
 
 ---
 
@@ -26,6 +26,25 @@ flowchart TD
     Tarefa --> Notificacao
 ```
 
+### Fluxo do CRON de notificações
+
+```mermaid
+flowchart TD
+    A([🕐 CRON — a cada 5 minutos]) --> B
+
+    B[Consulta agendador-tarefa] --> C{Tarefas encontradas?}
+
+    C -- Não --> D([Aguarda próximo ciclo])
+
+    C -- Sim --> E[Filtra StatusNotificacao = PENDENTE]
+
+    E --> F[Monta EmailDto com dados da tarefa]
+
+    F --> G[POST /email → agendador-notificacao]
+
+    G --> H([✅ E-mail enviado ao usuário])
+```
+
 ---
 
 ## 🚀 Tecnologias
@@ -36,15 +55,18 @@ flowchart TD
 | OpenFeign | Comunicação declarativa com microsserviços |
 | SpringDoc / Swagger UI | Documentação dos endpoints |
 | Spring Web | Exposição da API para o frontend |
+| CRON | Envio automático de email para o usuário |
 
 ---
 
 ## ⚙️ Funcionalidades
 
-- [x] Roteamento de requisições para os microsserviços correspondentes
-- [x] Comunicação com `agendador-usuario` e `agendador-tarefa` via OpenFeign
-- [x] Tratamento centralizado de erros HTTP (4xx, 5xx)
-- [x] Documentação interativa via Swagger UI
+- Roteamento de requisições para os microsserviços correspondentes
+- Comunicação com `agendador-usuario`, `agendador-tarefa` e `agendador-notificacao` via OpenFeign
+- CRON executado a cada 5 minutos para detecção de tarefas próximas do vencimento
+- Disparo automático de e-mail via endpoint do `agendador-notificacao`
+- Tratamento centralizado de erros HTTP (4xx, 5xx)
+- Documentação interativa via Swagger UI
 
 ---
 
@@ -53,22 +75,42 @@ flowchart TD
 Com a aplicação em execução, acesse:
 
 ```
-http://localhost:8080/swagger-ui.html
+http://localhost:8083/swagger-ui.html
 ```
 
 ---
 
 ## 🔧 Como Executar
 
-### Pré-requisitos
-- Java 25
-- `agendador-usuario` e `agendador-tarefa` em execução
+**Opção 1 — Ecossistema completo via agendador-hub (recomendado)**
 
-### Variáveis de Ambiente
+```bash
+git clone https://github.com/AndreLuizDSM/agendador-hub.git
+cd agendador-hub
+docker-compose up
+```
 
-```properties
-USUARIO_SERVICE_URL=http://localhost:8081
-TAREFA_SERVICE_URL=http://localhost:8082
+**Opção 2 — Ambiente de desenvolvimento local (docker-compose do BFF)**
+
+Este repositório possui um `docker-compose.yml` próprio que sobe todos os serviços do backend e builda o frontend localmente a partir do código fonte.
+
+> ⚠️ Para esta opção, o frontend Angular precisa estar clonado em `../../../Projetos-JavaScript/Angular/agendador-de-tarefas` em relação à pasta do BFF — ajuste o `context` no `docker-compose.yml` conforme sua estrutura de pastas.
+
+```bash
+docker-compose up --build
+```
+
+Os serviços sobem nas seguintes portas:
+
+| Serviço | Porta |
+|---|---|
+| agendador-front | `4200` |
+| bff-agendador-de-tarefas | `8083` |
+| agendador-usuario | `8080` |
+| agendador-tarefas | `8081` |
+| agendador-notificacao | `8082` |
+| PostgreSQL | `5433` |
+| MongoDB | `27017` |
 ```
 
 ### Rodando a aplicação
@@ -89,8 +131,3 @@ TAREFA_SERVICE_URL=http://localhost:8082
 | [agendador-front](../agendador-front) | Interface Angular |
 
 ---
-
-## 🧠 Decisões Técnicas
-
-**Por que usar BFF em vez de o frontend chamar os serviços diretamente?**
-Com um ponto de entrada único: (1) o frontend não precisa conhecer os endereços de cada serviço, (2) o tratamento de erro é centralizado, (3) é possível agregar dados de múltiplos serviços em uma única chamada, e (4) a documentação Swagger fica consolidada em um lugar só.
