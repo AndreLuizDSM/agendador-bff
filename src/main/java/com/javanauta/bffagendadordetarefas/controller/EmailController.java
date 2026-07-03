@@ -2,6 +2,7 @@ package com.javanauta.bffagendadordetarefas.controller;
 
 
 import com.javanauta.bffagendadordetarefas.business.EmailService;
+import com.javanauta.bffagendadordetarefas.business.dto.in.EmailDTO;
 import com.javanauta.bffagendadordetarefas.business.dto.out.TarefaDTOResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class EmailController {
 
     @PostMapping
     @CrossOrigin(origins = "http://localhost:4200")
-    public ResponseEntity<Void> enviarEmail(@RequestBody TarefaDTOResponse emailDTO){
+    public ResponseEntity<Void> enviarEmail(@RequestBody EmailDTO emailDTO){
         emailService.enviaEmail(emailDTO);
             return ResponseEntity.ok().build();
     }
