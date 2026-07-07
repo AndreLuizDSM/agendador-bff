@@ -4,7 +4,6 @@ import com.javanauta.bffagendadordetarefas.business.dto.in.TarefaDTORequest;
 import com.javanauta.bffagendadordetarefas.business.dto.out.TarefaDTOResponse;
 import com.javanauta.bffagendadordetarefas.business.enums.StatusNotificacaoEnum;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -19,8 +18,8 @@ public interface TarefaClient {
 
     @GetMapping("/eventos")
     List<TarefaDTOResponse> buscaListaDeTarefaPorPeriodo(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant dataInicial,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)Instant dataFinal,
+            @RequestParam Instant dataInicial,
+            @RequestParam Instant dataFinal,
             @RequestHeader(name = "Authorization", required = false) String token);
 
     @GetMapping
