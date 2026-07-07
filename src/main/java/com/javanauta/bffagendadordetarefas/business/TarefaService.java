@@ -7,7 +7,7 @@ import com.javanauta.bffagendadordetarefas.infrastructure.client.TarefaClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -21,7 +21,7 @@ public class TarefaService {
         return tarefaClient.salvarTarefa(tarefaDTO, token);
     }
 
-    public List<TarefaDTOResponse> buscarTarefaGravadaPorPerido(LocalDateTime dataInicial, LocalDateTime dataFinal,
+    public List<TarefaDTOResponse> buscarTarefaGravadaPorPerido(OffsetDateTime dataInicial, OffsetDateTime dataFinal,
                                                                 String token){
 
         return tarefaClient.buscaListaDeTarefaPorPeriodo(dataInicial, dataFinal, token);
