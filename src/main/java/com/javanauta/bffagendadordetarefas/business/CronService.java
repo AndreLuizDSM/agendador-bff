@@ -13,7 +13,8 @@ import org.springframework.cglib.core.Local;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -37,8 +38,8 @@ public class CronService {
         String token = login(converterLoginDTO());
         log.info("login feito");
 
-        OffsetDateTime horaFutura = OffsetDateTime.now().plusHours(1); //Buscar daqui 1 hora
-        OffsetDateTime horaFinalUmaHora = OffsetDateTime.now().plusHours(1).plusMinutes(5); // Pra cada 5 minutos,
+        Instant horaFutura = Instant.now().plus(1, ChronoUnit.HOURS); //Buscar daqui 1 hora
+        Instant horaFinalUmaHora = horaFutura.plus(5, ChronoUnit.MINUTES); // Pra cada 5 minutos,
         // fazer a notificação
         List<TarefaDTOResponse> listaTarefas = tarefaService.buscarTarefaGravadaPorPerido
                                                 (horaFutura, horaFinalUmaHora, token);
