@@ -5,9 +5,11 @@ import com.javanauta.bffagendadordetarefas.business.dto.out.TarefaDTOResponse;
 import com.javanauta.bffagendadordetarefas.business.enums.StatusNotificacaoEnum;
 import com.javanauta.bffagendadordetarefas.infrastructure.client.TarefaClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,7 +23,7 @@ public class TarefaService {
         return tarefaClient.salvarTarefa(tarefaDTO, token);
     }
 
-    public List<TarefaDTOResponse> buscarTarefaGravadaPorPerido(Instant dataInicial, Instant dataFinal,
+    public List<TarefaDTOResponse> buscarTarefaGravadaPorPerido(LocalDateTime dataInicial, LocalDateTime dataFinal,
                                                                 String token){
 
         return tarefaClient.buscaListaDeTarefaPorPeriodo(dataInicial, dataFinal, token);

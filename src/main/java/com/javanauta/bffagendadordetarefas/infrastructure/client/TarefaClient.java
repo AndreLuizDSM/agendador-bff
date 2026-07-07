@@ -4,9 +4,11 @@ import com.javanauta.bffagendadordetarefas.business.dto.in.TarefaDTORequest;
 import com.javanauta.bffagendadordetarefas.business.dto.out.TarefaDTOResponse;
 import com.javanauta.bffagendadordetarefas.business.enums.StatusNotificacaoEnum;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @FeignClient(name = "agendador-tarefas", url = "${agendador-tarefas.url}")
@@ -18,8 +20,8 @@ public interface TarefaClient {
 
     @GetMapping("/eventos")
     List<TarefaDTOResponse> buscaListaDeTarefaPorPeriodo(
-            @RequestParam Instant dataInicial,
-            @RequestParam Instant dataFinal,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicial,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal,
             @RequestHeader(name = "Authorization", required = false) String token);
 
     @GetMapping
