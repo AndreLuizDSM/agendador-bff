@@ -137,4 +137,26 @@ public class UsuarioController {
     public ResponseEntity<ViaCepDTOResponse> buscarCep (@PathVariable("cep") String cep) {
         return ResponseEntity.ok(cepService.buscaCep(cep));
     }
+
+    @DeleteMapping("/telefone")
+    @Operation(summary = "Deletar Telefone", description = "Deletar Telefone por Id")
+    @ApiResponse(responseCode = "200", description = "Telefone deletado")
+    @ApiResponse(responseCode = "404", description = "Telefone não encontrado")
+    @ApiResponse(responseCode = "500", description = "Erro de servidor")
+    public ResponseEntity<Void> deletaTelefonePorId(@RequestParam Long id,
+                                                      @RequestHeader(name = "Authorization", required = false) String token) {
+        usuarioService.deletarTelefone(id, token);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/endereco")
+    @Operation(summary = "Deletar Endereco", description = "Deletar Endereco por Id")
+    @ApiResponse(responseCode = "200", description = "Endereco deletado")
+    @ApiResponse(responseCode = "404", description = "Endereco não encontrado")
+    @ApiResponse(responseCode = "500", description = "Erro de servidor")
+    public ResponseEntity<Void> deletaEnderecoPorId(@RequestParam Long id,
+                                                    @RequestHeader(name = "Authorization", required = false) String token) {
+        usuarioService.deletarEndereco(id, token);
+        return ResponseEntity.ok().build();
+    }
 }

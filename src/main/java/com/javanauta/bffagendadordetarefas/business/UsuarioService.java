@@ -54,4 +54,12 @@ public class UsuarioService {
     public TelefoneDTOResponse cadastroTelefoneDTO (String token , TelefoneDTORequest telefoneDTO) {
             return usuarioClient.salvarTelefone(token, telefoneDTO);
     }
+
+    public void deletarTelefone (Long id, String token) {
+        usuarioClient.deletarTelefone(id, token);
+    }
+
+    public void deletarEndereco (Long id, String token) {
+        usuarioClient.deletarEndereco(id, token);
+    }
 }
