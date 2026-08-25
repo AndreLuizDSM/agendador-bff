@@ -29,6 +29,7 @@ services:
       - USUARIO_URL=usuario:8080/usuario
       - AGENDADOR_TAREFAS_URL=agendador-tarefas:8081/tarefas
       - NOTIFICACAO_URL=notificacao:8082/email
+      - SPRING_PROFILES_ACTIVE=dev
   usuario:
     image: aominedk/usuario-service:latest
     container_name: usuario
