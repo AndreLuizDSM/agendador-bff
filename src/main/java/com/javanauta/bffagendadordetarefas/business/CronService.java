@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -38,12 +39,12 @@ public class CronService {
         String token = login(converterLoginDTO());
         log.info("login feito");
 
-        Instant horaFutura = Instant.now().plus(1, ChronoUnit.HOURS); //Buscar daqui 1 hora
-        Instant horaFinalUmaHora = horaFutura.plus(5, ChronoUnit.MINUTES); // Pra cada 5 minutos,
-        // fazer a notificação
+        LocalDateTime horaFutura = LocalDateTime.now().plusHours(1); // 1 hora seguinte
+        LocalDateTime horaFinalUmaHora = horaFutura.plusMinutes(5);  // 1 hora e 5 minutos
         List<TarefaDTOResponse> listaTarefas = tarefaService.buscarTarefaGravadaPorPerido
                                                 (horaFutura, horaFinalUmaHora, token);
         log.info("lista pega " + listaTarefas);
+
 
         for (TarefaDTOResponse lista: listaTarefas) {
             tarefaService.alterarStatus(StatusNotificacaoEnum.NOTIFICADO, lista.getId(), token);
