@@ -20,8 +20,8 @@ public interface TarefaClient {
 
     @GetMapping("/eventos")
     List<TarefaDTOResponse> buscaListaDeTarefaPorPeriodo(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicial,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal,
+            @RequestParam Instant dataInicial,
+            @RequestParam Instant dataFinal,
             @RequestHeader(name = "Authorization", required = false) String token);
 
     @GetMapping

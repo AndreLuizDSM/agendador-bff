@@ -44,8 +44,8 @@ public class TarefaController {
     @ApiResponse(responseCode = "403", description = "Email não encontrado")
     @ApiResponse(responseCode = "500", description = "Erro de servidor")
     public ResponseEntity<List<TarefaDTOResponse>> buscaListaDeTarefaPorPeriodo(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicial,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal,
+            @RequestParam Instant dataInicial,
+            @RequestParam Instant dataFinal,
             @RequestHeader(value = "Authorization", required = false)String token){
 
         return ResponseEntity.ok(tarefaService.buscarTarefaGravadaPorPerido(dataInicial, dataFinal, token));
