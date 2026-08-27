@@ -3,6 +3,7 @@ package com.javanauta.bffagendadordetarefas.business.dto.out;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.javanauta.bffagendadordetarefas.business.enums.StatusNotificacaoEnum;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 import java.time.Instant;
@@ -17,10 +18,9 @@ public class TarefaDTOResponse {
     private String id;
     private String nomeTarefa;
     private String descricao;
+    private Instant dataCriacao;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime dataCriacao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone = "UTC")
-    private Instant dataEvento;
+    private LocalDateTime dataEvento;
     private String emailUsuario;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime dataAlteracao;
