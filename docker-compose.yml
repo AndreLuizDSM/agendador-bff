@@ -2,14 +2,16 @@ version: "3.8"
 
 services:
   agendador-tarefas:
-    image: aominedk/agendador-tarefas-service:latest
+    image: aominedk/agendador-tarefas:latest
     container_name: agendador-tarefas
     ports:
       - "8081:8081"
     environment:
       - SPRING_MONGODB_URI=mongodb://mongo:27017/db_agendador
+      - USUARIO_URL=usuario:8080/usuario
     depends_on:
       - mongo
+      - usuario
   agendador-front:
     build:
       context: ../../../Projetos-JavaScript/Angular/agendador-de-tarefas
@@ -29,6 +31,7 @@ services:
       - USUARIO_URL=usuario:8080/usuario
       - AGENDADOR_TAREFAS_URL=agendador-tarefas:8081/tarefas
       - NOTIFICACAO_URL=notificacao:8082/email
+      - SPRING_PROFILES_ACTIVE=dev
   usuario:
     image: aominedk/usuario-service:latest
     container_name: usuario

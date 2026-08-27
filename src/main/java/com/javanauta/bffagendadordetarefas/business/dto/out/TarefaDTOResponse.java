@@ -3,6 +3,7 @@ package com.javanauta.bffagendadordetarefas.business.dto.out;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.javanauta.bffagendadordetarefas.business.enums.StatusNotificacaoEnum;
 import lombok.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
 import java.time.Instant;
