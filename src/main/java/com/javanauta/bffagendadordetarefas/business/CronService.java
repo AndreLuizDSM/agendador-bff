@@ -39,8 +39,8 @@ public class CronService {
         String token = login(converterLoginDTO());
         log.info("login feito");
 
-        LocalDateTime horaFutura = LocalDateTime.now().plusHours(1); // 1 hora seguinte
-        LocalDateTime horaFinalUmaHora = horaFutura.plusMinutes(5);  // 1 hora e 5 minutos
+        LocalDateTime horaFutura = LocalDateTime.now().plusMinutes(30); // 30min seguintes
+        LocalDateTime horaFinalUmaHora = horaFutura.plusHours(1);  // 1 hora seguinte -> entre 30m e 1h30
         List<TarefaDTOResponse> listaTarefas = tarefaService.buscarTarefaGravadaPorPerido
                                                 (horaFutura, horaFinalUmaHora, token);
         log.info("lista pega " + listaTarefas);
